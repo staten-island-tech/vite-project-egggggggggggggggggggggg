@@ -8,6 +8,19 @@ body,
 }
 
 :root {
-    --red: #1000;
-    --blue: #1000;
+    --dark: #000000;
+    --light: #ffffff;
+}
+
+body {
+    background-color: var(--dark);
+}
+
+.dark {
+    background-color: var(--dark);
+
+}
+
+.light {
+    background-color: var(--light);
 }
