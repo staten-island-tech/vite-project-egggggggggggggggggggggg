@@ -10,6 +10,8 @@ body,
 :root {
     --dark: #000000;
     --light: #ffffff;
+    --active: 10px;
+    --nonactive: 0px;
 }
 
 body {
@@ -18,9 +20,42 @@ body {
 
 .dark {
     background-color: var(--dark);
-
 }
 
 .light {
     background-color: var(--light);
+}
+
+.slider {
+    display: inline-block;
+    align-items: center;
+    border-radius: 30px;
+    background-color: white;
+    height: 2rem;
+    width: 2rem;
+}
+
+.activeon {
+    transform: translate(2rem);
+    transition: transform 0.3s ease;
+}
+
+.activeoff {
+    transition: transform 0.3s ease;
+}
+
+.switch {
+    background-color: lightblue;
+    border-radius: 34px;
+    display: inline-block;
+    width: 6rem;
+    height: 2.5rem;
+    margin: 1rem 1rem;
+    position: relative;
+    transition: transform 0.5s ease;
+    align-items;
+}
+
+input {
+    opacity: 0;
 }
