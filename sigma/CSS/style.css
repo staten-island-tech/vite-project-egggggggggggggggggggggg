@@ -167,3 +167,25 @@ input[type="text"] {
 .fade-out {
     opacity: 0;
 }
+
+.bar {
+    overflow: hidden;
+    background-color: white;
+    height: 10rem;
+    width: 100%;
+    background-color: teal;
+    position: fixed;
+}
+
+
+.menu_bar {
+    float: left;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    padding: 2rem;
+    text-align: center;
+    background-color: teal;
+    border-color: white;
+    border: white;
+}

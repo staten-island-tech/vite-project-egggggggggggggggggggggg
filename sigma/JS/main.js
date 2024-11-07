@@ -5,9 +5,18 @@ const DOMSelectors =
 {
         button: document.querySelector(".switch input"),
         container: document.querySelector(".container"),
-        form: document.querySelector("form")
+        form: document.querySelector("form"),
+        menu_pic: document.querySelector(".menu_pic"),
+        menu: document.querySelector(".menu_bar")
 }
+console.log(DOMSelectors.menu)
+DOMSelectors.menu.addEventListener("click",
+  function()
+    {
+      DOMSelectors.menu.style.backgroundColor = "white"
 
+    }
+)
 pokemon.forEach(stats=>
     {
         DOMSelectors.container.insertAdjacentHTML(
@@ -78,6 +87,7 @@ DOMSelectors.form.addEventListener("submit", function (event) {
     if(!name||!image){
         console.log("INPUT SOMETHING")
     }
+    
     
 })
 DOMSelectors.button.addEventListener("change", function(event)
