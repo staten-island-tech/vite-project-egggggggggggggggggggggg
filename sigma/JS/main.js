@@ -13,7 +13,7 @@ console.log(DOMSelectors.menu)
 DOMSelectors.menu.addEventListener("click",
   function()
     {
-      DOMSelectors.menu.style.backgroundColor = "white"
+      DOMSelectors.menu.style.backgroundColor = "#037c6e"
 
     }
 )
