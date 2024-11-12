@@ -6,14 +6,45 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite App</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+  </style>
 </head>
 
-<body class="dark">
-
-  <div class="bar">
-    <div class="menu_bar">
-      <img class="menu_pic" src="picture/menubar.png">
+<body class="light">
+  <div class="menu">
+    <div class="weight_options filter">
+      <h2>Weight</h2>
+      <form class="weight_limit_text">
+        <input type="text" class="min" placeholder="Min" >
+        -
+        <input type="text" class="max" placeholder="Max">
+      </form> 
+      <div class="weight_limit_sliders">
+        <div class="slider_bar"></div>
+        <div class="slider_fill_in"></div>
+        <div class="slider_min circle"></div>
+        <div class="slider_max circle"></div>
+      </div>
     </div>
+    <div class="type filter">
+      <h2>Type</h2>
+      <form>
+        <label><input type="checkbox" class="fire"></label> 
+        <label><input type="checkbox" class="water"></label> 
+        <label><input type="checkbox" class="grass"></label> 
+        <label><input type="checkbox" class="fairy"></label> 
+        <label><input type="checkbox" class="dragon"></label> 
+      </form>
+    </div>
+    <div class="evolution_amount filter">
+      <h2>Evolution</h2>
+      <form>
+        <label><input type="checkbox" class="mega_evolution"></label>
+        <label><input type="checkbox" class="evolves"></label>
+      </form>
+    </div>
+  </div>
     <div id="background_switch">
       <h2>Buttons</h2>
       <label class="switch">
@@ -21,13 +52,9 @@
         <span class="slider activeon"></span>
       </label>
     </div>
+  <div class="container">
+
   </div>
-  <form>
-    <input type="text" placeholder="Name" value="" class="Name">
-    <input type="text" placeholder="Type" value="" class="IMAGE_URL">
-    <button>SUBMIT</button>
-  </form>
-  <div class="container"></div>
   <script type="module" src="JS/main.js"></script>
 </body>
 

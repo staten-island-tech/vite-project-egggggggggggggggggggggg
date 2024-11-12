@@ -9,7 +9,7 @@ body,
 
 :root {
     --dark: #262739;
-    --light: ##e7f8ea;
+    --light: #e7f8ea;
     --active: 10px;
     --nonactive: 0px;
 }
@@ -30,6 +30,10 @@ body {
     width: 3rem;
     display: center;
     justify-content: flex;
+    margin: 10px;
+    padding: 10px;
+    float: left;
+    height: 100%;
 }
 
 h2 {
@@ -69,17 +73,88 @@ h2 {
 }
 
 input[type="checkbox"] {
-    opacity: 0;
+    opacity: 1;
 }
+.weight_limit_sliders
+{
+    position: relative;
+    width:30%;
+    height:30%;
+    background:white;
 
+}
+.slider_bar
+{
+    border-radius: 1rem;
+    position:absolute;
+    left:0;
+    top:50%;
+    height:0.25rem;
+    background-color: grey;
+    width:100%;
+    transform:translateY(-50%);
+}
+.slider_fill_in
+{
+    position: absolute;
+    top:50%;
+    left:0;
+    width:1rem;
+    height:0.25rem;
+    background:rgba(160, 18, 18, 0.7);
+    transform:translateY(-50%);
+
+}
+.circle
+{
+    border-radius: 1rem;
+    cursor:pointer;
+    background-color: lightblue;
+    position: absolute;
+    height:1rem;
+    width:1rem;
+    top:25%;
+}
+.slider_min
+{
+    left:-1%;
+}
+.slider_max
+{
+    left: 100%;
+}
 input[type="text"] {
     height: 3rem;
     width: 16rem;
-    border-radius: 5px;
     text-align: center;
-    border-color: white;
-    box-shadow: 10px 10px 10px rgba(249, 238, 238, 0.189);
+    border-color: lightgrey;
     font-size: 2rem;
+    font-family:"Lato", sans-serif;
+    border-width:1px;
+    color: #0c0c0c;
+    border-style:solid;
+    margin:1rem;
+    
+}
+
+.lato-light {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+.filter
+{
+    background-color: white;
+    width:30%;
+    height:12rem;
+    align-items: center;
+    justify-content: center;
+    display:flex;
+    padding:2rem;
+    margin:2rem auto;
+    flex-direction: column;
 }
 
 .container {
@@ -90,7 +165,6 @@ input[type="text"] {
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
 .card {
     width: 30%;
     border-radius: 5px;
@@ -168,33 +242,3 @@ input[type="text"] {
     opacity: 0;
 }
 
-.bar {
-    overflow: hidden;
-    background-color: white;
-    height: 10rem;
-    width: 100%;
-    background-color: teal;
-    position: fixed;
-}
-
-
-.menu_bar {
-    float: left;
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    padding: 2rem;
-    text-align: center;
-    background-color: teal;
-    border-color: white;
-    border: white;
-}
-
-.background_switch {
-    margin: 10px;
-    padding: 10px;
-    float: left;
-    display: flex;
-    justify-content: center;
-    height: 100%
-}

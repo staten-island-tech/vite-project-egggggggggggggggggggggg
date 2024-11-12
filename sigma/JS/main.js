@@ -1,22 +1,55 @@
 import '../css/style.css'
 import {pokemon} from "../JS/items.js"
 console.log(pokemon);
+let drag =  false;
 const DOMSelectors = 
 {
         button: document.querySelector(".switch input"),
         container: document.querySelector(".container"),
         form: document.querySelector("form"),
         menu_pic: document.querySelector(".menu_pic"),
-        menu: document.querySelector(".menu_bar")
-}
-console.log(DOMSelectors.menu)
-DOMSelectors.menu.addEventListener("click",
-  function()
-    {
-      DOMSelectors.menu.style.backgroundColor = "#037c6e"
+        menu: document.querySelector(".menu_bar"),
+        weight_options: document.querySelector(".weight_options"),
+        slider_min:document.querySelector(".slider_min"),
+        slider_max:document.querySelector(".slider_max"),
+        slider_bar:document.querySelector(".slider_bar"),
+        slider_fill_in:document.querySelector(".slider_fill_in"),
+        circle:document.querySelector(".circle"),
 
-    }
+}
+//Make sure it picks the right circle(closest) cursor position must be directly on top of the circle 
+//Make it so the max and min(vice versa) do not ever meet and cause problems (add a range of possible value)
+//
+//Make so it only change X positon (hori)
+//Get cursor current X position
+//Make sure its within range of set range, if not set it to either min or max Accomplish with mousemove/other function
+//Set the current position of it based off the style.left propety 
+//take original circle position and subtract it from the determined position of the cursor. then add that difference to the style.left propety
+
+DOMSelectors.circle.addEventListener("mousedown", 
+  function(event)
+  {        
+    drag=true;
+    const circlePropeties = DOMSelectors.circle.getBoundingClientRect();
+    const currentPosition =  circlePropeties.left;
+    console.log(currentPosition);
+  }
+
 )
+DOMSelectors.circle.addEventListener("mouseup", function(event){
+  drag=false;
+})
+document.addEventListener("mousemove",function(event){
+    if(drag){
+      const circlePropeties = DOMSelectors.circle.getBoundingClientRect();
+      const currentPosition =  (circlePropeties.left + circlePropeties.right)/2;
+      const x = event.clientX-currentPosition;
+      DOMSelectors.circle.style.left = `${x}px`;
+      
+    }
+  }
+)
+console.log(DOMSelectors.menu)
 pokemon.forEach(stats=>
     {
         DOMSelectors.container.insertAdjacentHTML(
@@ -26,10 +59,12 @@ pokemon.forEach(stats=>
               <img src="${stats["photos"]}" alt="${stats["name"]}" class="card_img">
               <h2 class="card_header">${stats["type"]}</h2>
               <h2 class="card_header">${stats["evolution"]}</h2> 
+              <h2 class="card_header">${stats["weight"]} kg</h2> 
             </div>`
           );
     }
 )
+
 
 DOMSelectors.container.addEventListener("click", function (event) {
   const element_selected = event.target.closest(".card");
