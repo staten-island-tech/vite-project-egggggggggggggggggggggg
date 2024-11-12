@@ -26,25 +26,19 @@ const DOMSelectors =
 //Set the current position of it based off the style.left propety 
 //take original circle position and subtract it from the determined position of the cursor. then add that difference to the style.left propety
 
-DOMSelectors.circle.addEventListener("mousedown", 
-  function(event)
-  {        
+DOMSelectors.circle.addEventListener("mousedown", function(event){        
     drag=true;
-    const circlePropeties = DOMSelectors.circle.getBoundingClientRect();
-    const currentPosition =  circlePropeties.left;
-    console.log(currentPosition);
-  }
-)
-
+})
 DOMSelectors.circle.addEventListener("mouseup", function(event){
   drag=false;
 })
 document.addEventListener("mousemove",function(event){
     if(drag){
       const circlePropeties = DOMSelectors.circle.getBoundingClientRect();
-      const currentPosition =  (circlePropeties.left + circlePropeties.right)/2;
-      const changeX = event.clientX-currentPosition;
-      DOMSelectors.circle.style.left = `${currentPosition+changeX}px`;
+      const currentLeft =  circlePropeties.left;
+      const changeX = event.clientX- currentLeft;
+      console.log(changeX, currentLeft);
+      DOMSelectors.circle.style.left = `${changeX}px`;
       
     }
   }

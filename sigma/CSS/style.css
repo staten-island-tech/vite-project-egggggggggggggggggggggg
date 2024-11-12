@@ -75,66 +75,77 @@ h2 {
 input[type="checkbox"] {
     opacity: 1;
 }
-.weight_limit_sliders
-{
+
+.weight_limit_sliders {
     position: relative;
-    width:30%;
-    height:30%;
-    background:white;
+    width: 30%;
+    height: 30%;
+    background: white;
 
 }
-.slider_bar
-{
+
+.slider_bar {
     border-radius: 1rem;
-    position:absolute;
-    left:0;
-    top:50%;
-    height:0.25rem;
-    background-color: grey;
-    width:100%;
-    transform:translateY(-50%);
-}
-.slider_fill_in
-{
     position: absolute;
-    top:50%;
-    left:0;
-    width:1rem;
-    height:0.25rem;
-    background:rgba(160, 18, 18, 0.7);
-    transform:translateY(-50%);
+    left: 0;
+    top: 50%;
+    height: 0.25rem;
+    background-color: grey;
+    width: 100%;
+    transform: translateY(-50%);
+}
+
+.slider_fill_in {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1rem;
+    height: 0.25rem;
+    background: rgba(160, 18, 18, 0.7);
+    transform: translateY(-50%);
 
 }
-.circle
-{
+
+.circle {
     border-radius: 1rem;
-    cursor:pointer;
+    cursor: pointer;
     background-color: lightblue;
     position: absolute;
-    height:1rem;
-    width:1rem;
-    top:25%;
+    height: 1rem;
+    width: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+
 }
-.slider_min
-{
-    left:-1%;
+
+.slider_min,
+.slider_max {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
-.slider_max
-{
+
+.slider_min {
+    left: -1%;
+
+}
+
+.slider_max {
     left: 100%;
 }
+
 input[type="text"] {
     height: 3rem;
     width: 16rem;
     text-align: center;
     border-color: lightgrey;
     font-size: 2rem;
-    font-family:"Lato", sans-serif;
-    border-width:1px;
+    font-family: "Lato", sans-serif;
+    border-width: 1px;
     color: #0c0c0c;
-    border-style:solid;
-    margin:1rem;
-    
+    border-style: solid;
+    margin: 1rem;
+
 }
 
 .lato-light {
@@ -144,16 +155,15 @@ input[type="text"] {
 }
 
 
-.filter
-{
+.filter {
     background-color: white;
-    width:30%;
-    height:12rem;
+    width: 30%;
+    height: 12rem;
     align-items: center;
     justify-content: center;
-    display:flex;
-    padding:2rem;
-    margin:2rem auto;
+    display: flex;
+    padding: 2rem;
+    margin: 2rem auto;
     flex-direction: column;
 }
 
@@ -165,6 +175,7 @@ input[type="text"] {
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
 .card {
     width: 30%;
     border-radius: 5px;
@@ -241,4 +252,3 @@ input[type="text"] {
 .fade-out {
     opacity: 0;
 }
-
