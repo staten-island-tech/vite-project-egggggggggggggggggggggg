@@ -44,11 +44,24 @@ document.addEventListener("mousemove",function(event){
       const circlePropeties = DOMSelectors.circle.getBoundingClientRect();
       const currentPosition =  (circlePropeties.left + circlePropeties.right)/2;
       const x = event.clientX-currentPosition;
-      DOMSelectors.circle.style.left = `${x}px`;
+      DOMSelectors.circle.style.left = `${currentPosition+x}px`;
       
     }
   }
 )
+
+//Type Check
+//When the checkbox is checked underlay an element under the circle picture to create the illusion of it being selected
+//Keep track of the input values to utilize for searching. 
+DOMSelectors.
+
+//Evolution Check
+//Might be a dropdown menu or checkboxes
+//Utilize the same idea as before where place priority on certain evolutions etc
+
+
+//First searches for weight that matches range, then goes for the Type Check and then evolution check. 
+//If none of the pokemon match all the conditons search for the one that is closest to the conditions set. 
 console.log(DOMSelectors.menu)
 pokemon.forEach(stats=>
     {
@@ -57,9 +70,9 @@ pokemon.forEach(stats=>
             `<div class="card">
               <h2 class="card_header">${stats["name"]}</h2>
               <img src="${stats["photos"]}" alt="${stats["name"]}" class="card_img">
-              <h2 class="card_header">${stats["type"]}</h2>
-              <h2 class="card_header">${stats["evolution"]}</h2> 
-              <h2 class="card_header">${stats["weight"]} kg</h2> 
+              <h2 class="card_header">Type : ${stats["type"]}</h2>
+              <h2 class="card_header">Evolution : ${stats["evolution"]}</h2> 
+              <h2 class="card_header">Weight : ${stats["weight"]} kg</h2> 
             </div>`
           );
     }
