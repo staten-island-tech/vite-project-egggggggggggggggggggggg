@@ -34,8 +34,8 @@ DOMSelectors.circle.addEventListener("mousedown",
     const currentPosition =  circlePropeties.left;
     console.log(currentPosition);
   }
-
 )
+
 DOMSelectors.circle.addEventListener("mouseup", function(event){
   drag=false;
 })
@@ -43,8 +43,8 @@ document.addEventListener("mousemove",function(event){
     if(drag){
       const circlePropeties = DOMSelectors.circle.getBoundingClientRect();
       const currentPosition =  (circlePropeties.left + circlePropeties.right)/2;
-      const x = event.clientX-currentPosition;
-      DOMSelectors.circle.style.left = `${currentPosition+x}px`;
+      const changeX = event.clientX-currentPosition;
+      DOMSelectors.circle.style.left = `${currentPosition+changeX}px`;
       
     }
   }
@@ -53,7 +53,6 @@ document.addEventListener("mousemove",function(event){
 //Type Check
 //When the checkbox is checked underlay an element under the circle picture to create the illusion of it being selected
 //Keep track of the input values to utilize for searching. 
-DOMSelectors.
 
 //Evolution Check
 //Might be a dropdown menu or checkboxes
