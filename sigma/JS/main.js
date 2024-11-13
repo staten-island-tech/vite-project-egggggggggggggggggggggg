@@ -25,6 +25,27 @@ const DOMSelectors =
 //Make sure its within range of set range, if not set it to either min or max Accomplish with mousemove/other function
 //Set the current position of it based off the style.left propety 
 //take original circle position and subtract it from the determined position of the cursor. then add that difference to the style.left propety
+function filter(weight_range, type, evolution){
+  let arrayValue =  []
+  pokemon.forEach(poke=> {
+    
+    if(weight_range in poke)
+      {
+        
+      }
+    if(type in poke)
+      {
+
+      }
+    if(evolution in poke)
+      {
+
+      }
+  })
+  
+}
+
+
 let initXvalue = 0;
 let originalLEFT= 0;
 DOMSelectors.circle.addEventListener("mousedown", function(event){        
@@ -32,20 +53,28 @@ DOMSelectors.circle.addEventListener("mousedown", function(event){
     initXvalue = event.clientX;
     console.log("old initXvalue",initXvalue);
     console.log("STARTED DRAGGING")
-    originalLEFT = DOMSelectors.circle.getBoundingClientRect().left;
+    originalLEFT = parseFloat(DOMSelectors.circle.style.left||0);
+
 })
 
 document.addEventListener("mousemove",function(event){
     if(drag){
       console.log(initXvalue, originalLEFT);
       const difference = event.clientX - initXvalue; 
-      console.log(event.clientX)
-      DOMSelectors.circle.style.left = `${difference}px`;   
-     }
+      console.log(DOMSelectors.circle.style.left,"style.left", DOMSelectors.circle.getBoundingClientRect().left,"getBoundLeft", initXvalue, "initXvalue")
+      if(parseFloat(DOMSelectors.circle.style.left)<0){
+        DOMSelectors.circle.style.left = "0px";
+      }
+      else
+      {
+        DOMSelectors.circle.style.left = `${originalLEFT+difference}px`;
+      }
+     }  
   }
 )
 DOMSelectors.circle.addEventListener("mouseup", function(event){
-  drag=false;  console.log("new initXvalue",initXvalue)
+  drag=false;  
+  console.log("new initXvalue",initXvalue)
   console.log("LEFT THE DRAG")
 })
 //Type Check
