@@ -71,11 +71,6 @@ h2 {
     transition: transform 0.5s ease;
     vertical-align: middle;
 }
-
-input[type="checkbox"] {
-    opacity: 1;
-}
-
 .weight_limit_sliders {
     position: relative;
     width: 30%;
@@ -94,11 +89,17 @@ input[type="checkbox"] {
     width: 100%;
     transform: translateY(-50%);
 }
-
+input[type="checkbox"]
+{
+    opacity: 0.5;
+    position:absolute;
+    z-index: 0;
+}
+/*something about making row by column and relative to parent element*/
 .slider_fill_in {
     position: absolute;
     top: 50%;
-    left: 0;
+    left: 0%;
     width: 1rem;
     height: 0.25rem;
     background: rgba(160, 18, 18, 0.7);
@@ -126,7 +127,7 @@ input[type="checkbox"] {
 }
 
 .slider_min {
-    left: -1%;
+    left: 0%;
 
 }
 
@@ -158,15 +159,25 @@ input[type="text"] {
 .filter {
     background-color: white;
     width: 30%;
-    height: 12rem;
+    height: 12rem auto;
     align-items: center;
     justify-content: center;
     display: flex;
     padding: 2rem;
     margin: 2rem auto;
     flex-direction: column;
-}
 
+}
+.type_photos
+{
+    height:1.5rem;
+    width:1.5rem;
+}
+.type_list
+{
+    display:flex;
+    flex-wrap:wrap;
+}
 .container {
     align-items: center;
     width: 90vw;

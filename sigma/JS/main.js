@@ -25,25 +25,29 @@ const DOMSelectors =
 //Make sure its within range of set range, if not set it to either min or max Accomplish with mousemove/other function
 //Set the current position of it based off the style.left propety 
 //take original circle position and subtract it from the determined position of the cursor. then add that difference to the style.left propety
-
+let initXvalue = 0;
+let originalLEFT= 0;
 DOMSelectors.circle.addEventListener("mousedown", function(event){        
     drag=true;
+    initXvalue = event.clientX;
+    console.log("old initXvalue",initXvalue);
+    console.log("STARTED DRAGGING")
+    originalLEFT = DOMSelectors.circle.getBoundingClientRect().left;
 })
-DOMSelectors.circle.addEventListener("mouseup", function(event){
-  drag=false;
-})
+
 document.addEventListener("mousemove",function(event){
     if(drag){
-      const circlePropeties = DOMSelectors.circle.getBoundingClientRect();
-      const currentLeft =  circlePropeties.left;
-      const changeX = event.clientX- currentLeft;
-      console.log(changeX, currentLeft);
-      DOMSelectors.circle.style.left = `${changeX}px`;
-      
-    }
+      console.log(initXvalue, originalLEFT);
+      const difference = event.clientX - initXvalue; 
+      console.log(event.clientX)
+      DOMSelectors.circle.style.left = `${difference}px`;   
+     }
   }
 )
-
+DOMSelectors.circle.addEventListener("mouseup", function(event){
+  drag=false;  console.log("new initXvalue",initXvalue)
+  console.log("LEFT THE DRAG")
+})
 //Type Check
 //When the checkbox is checked underlay an element under the circle picture to create the illusion of it being selected
 //Keep track of the input values to utilize for searching. 
