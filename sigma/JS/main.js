@@ -15,6 +15,7 @@ const DOMSelectors =
         slider_bar:document.querySelector(".slider_bar"),
         slider_fill_in:document.querySelector(".slider_fill_in"),
         circle:document.querySelector(".circle"),
+        type_label:document.querySelectorAll(".type_label")
 
 }
 //Make sure it picks the right circle(closest) cursor position must be directly on top of the circle 
@@ -47,39 +48,70 @@ function filter(weight_range, type, evolution){
 
 
 let initXvalue = 0;
-let originalLEFT= 0;
-DOMSelectors.circle.addEventListener("mousedown", function(event){        
+let originalLEFT=0;
+let onMouseMove=null;
+let eventCounter = 0;
+//Trigger this when mousedown occurs aka when clicked
+function intializeEvent(item){
     drag=true;
-    initXvalue = event.clientX;
-    console.log("old initXvalue",initXvalue);
-    console.log("STARTED DRAGGING")
-    originalLEFT = parseFloat(DOMSelectors.circle.style.left||0);
+    eventCounter+=1;
+    console.log(eventCounter);
+    initXvalue = item.clientX;
+    originalLEFT =  parseFloat(item.target.style.left||0)
+    console.log(originalLEFT);
+    changePosition(item);
+    console.log(item)
+}
 
-})
+//Move to here when initializeEvent has occured
+function changePosition(item){
+    onMouseMove = function(event)
+    {
+        const item_target = item.target;
+        if(drag){
+            const difference =  event.clientX-initXvalue;
+            const currentLeft = parseFloat(item_target.style.left);
+            console.log(currentLeft,"CURRENTLEFt",item_target.style.left)
+            console.log(DOMSelectors.slider_min.style.left, "MIN", DOMSelectors.slider_max.style.left,"MAX")
+            if((currentLeft<0 || currentLeft>90)||(parseFloat(DOMSelectors.slider_min.style.left) > parseFloat(DOMSelectors.slider_max.style.left)))
+            {
+                console.log("range not exceeded/both positions do not equal each other")
+                if(item_target.className=="slider_min circle")
+                {
+                    console.log("sliderMin modified");
+                    item_target.style.left="0%";
+                }
+                else if(item_target.className=="slider_max circle")
+                {
+                    console.log("sliderMax modified");
+                    item_target.style.left="100%";
+                }
+                endDrag();
+            }//Checks to prevent position of circle from going too far left or too far right and also makes sure they dont end up in same position
+            else
+            {
+                item_target.style.left = `${originalLEFT+difference}px`;
+            }}
+    }
+    document.addEventListener("mousemove", onMouseMove);
+}
+function endDrag()
+{
+    drag=false;
+    document.removeEventListener("mousemove",onMouseMove);
 
-document.addEventListener("mousemove",function(event){
-    if(drag){
-      console.log(initXvalue, originalLEFT);
-      const difference = event.clientX - initXvalue; 
-      console.log(DOMSelectors.circle.style.left,"style.left", DOMSelectors.circle.getBoundingClientRect().left,"getBoundLeft", initXvalue, "initXvalue")
-      if(parseFloat(DOMSelectors.circle.style.left)<0){
-        DOMSelectors.circle.style.left = "0px";
-      }
-      else
-      {
-        DOMSelectors.circle.style.left = `${originalLEFT+difference}px`;
-      }
-     }  
-  }
-)
-DOMSelectors.circle.addEventListener("mouseup", function(event){
-  drag=false;  
-  console.log("new initXvalue",initXvalue)
-  console.log("LEFT THE DRAG")
-})
+}
+document.querySelectorAll('.circle').forEach(circle =>{circle.addEventListener("mousedown",event => intializeEvent(event))});
+document.querySelectorAll('.circle').forEach(circle =>{circle.addEventListener("mouseup", endDrag)});
 //Type Check
 //When the checkbox is checked underlay an element under the circle picture to create the illusion of it being selected
 //Keep track of the input values to utilize for searching. 
+function get_type_list_values(){
+    let type_true = []
+    console.log(DOMSelectors.type_label);
+    console.log(DOMSelectors.type_label[0]);
+}
+get_type_list_values();
 
 //Evolution Check
 //Might be a dropdown menu or checkboxes
@@ -88,6 +120,8 @@ DOMSelectors.circle.addEventListener("mouseup", function(event){
 
 //First searches for weight that matches range, then goes for the Type Check and then evolution check. 
 //If none of the pokemon match all the conditons search for the one that is closest to the conditions set. 
+
+
 console.log(DOMSelectors.menu)
 pokemon.forEach(stats=>
     {

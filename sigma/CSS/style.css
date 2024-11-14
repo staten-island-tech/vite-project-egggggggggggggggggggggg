@@ -12,6 +12,8 @@ body,
     --light: #e7f8ea;
     --active: 10px;
     --nonactive: 0px;
+    --max:100%;
+    --min:0%;
 }
 
 body {
@@ -76,7 +78,8 @@ h2 {
     width: 30%;
     height: 30%;
     background: white;
-
+    margin:1rem auto;
+    padding:1rem;
 }
 
 .slider_bar {
@@ -134,7 +137,10 @@ input[type="checkbox"]
 .slider_max {
     left: 100%;
 }
-
+.weight_limit_text
+{
+    user-select:none;
+}
 input[type="text"] {
     height: 3rem;
     width: 16rem;
