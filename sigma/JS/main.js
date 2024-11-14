@@ -1,6 +1,5 @@
 import '../css/style.css'
 import {pokemon} from "../JS/items.js"
-console.log(pokemon);
 let drag =  false;
 const DOMSelectors = 
 {
@@ -15,7 +14,8 @@ const DOMSelectors =
         slider_bar:document.querySelector(".slider_bar"),
         slider_fill_in:document.querySelector(".slider_fill_in"),
         circle:document.querySelector(".circle"),
-        type_label:document.querySelectorAll(".type_label")
+        submit:document.querySelector(".submit"),
+        type_label:document.querySelectorAll(".type_list")
 
 }
 //Make sure it picks the right circle(closest) cursor position must be directly on top of the circle 
@@ -106,12 +106,39 @@ document.querySelectorAll('.circle').forEach(circle =>{circle.addEventListener("
 //Type Check
 //When the checkbox is checked underlay an element under the circle picture to create the illusion of it being selected
 //Keep track of the input values to utilize for searching. 
-function get_type_list_values(){
-    let type_true = []
-    console.log(DOMSelectors.type_label);
-    console.log(DOMSelectors.type_label[0]);
+function fetch_weight_limits()
+{
+  DOMSelectors.wegiht
 }
-get_type_list_values();
+function get_type_list_values(){
+    let type_true = []  
+    let value = null;
+    const input_list =  document.querySelectorAll(`.type_list input[type="checkbox"]`);
+    input_list.forEach(input=>{
+      if(input.checked)
+        {
+          value = true;
+        }
+        else
+        {
+          value = false;
+        }
+        type_true.push(value);
+    });
+    return type_true;
+}
+DOMSelectors.submit.addEventListener("click", function(event)
+{
+  event.preventDefault();
+  const typeSelected = get_type_list_values();
+  console.log(typeSelected);
+  const min =  document.querySelector(".min").value;
+  const max =  document.querySelector(".max").value;
+  console.log(min, max);
+  
+  
+})
+
 
 //Evolution Check
 //Might be a dropdown menu or checkboxes
@@ -134,7 +161,7 @@ pokemon.forEach(stats=>
               <h2 class="card_header">Evolution : ${stats["evolution"]}</h2> 
               <h2 class="card_header">Weight : ${stats["weight"]} kg</h2> 
             </div>`
-          );
+        );
     }
 )
 
