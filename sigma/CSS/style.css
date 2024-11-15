@@ -6,6 +6,7 @@ body,
     font-size: 10px;
     box-sizing: border-box;
 }
+
 .order-0 {
     order: 0;
 }
@@ -17,13 +18,14 @@ body,
 .order-2 {
     order: 2;
 }
+
 :root {
     --dark: #262739;
     --light: #e7f8ea;
     --active: 10px;
     --nonactive: 0px;
-    --max:100%;
-    --min:0%;
+    --max: 100%;
+    --min: 0%;
 }
 
 body {
@@ -83,13 +85,14 @@ h2 {
     transition: transform 0.5s ease;
     vertical-align: middle;
 }
+
 .weight_limit_sliders {
     position: relative;
     width: 30%;
     height: 30%;
     background: white;
-    margin:1rem auto;
-    padding:1rem;
+    margin: 1rem auto;
+    padding: 1rem;
 }
 
 .slider_bar {
@@ -102,12 +105,17 @@ h2 {
     width: 100%;
     transform: translateY(-50%);
 }
-input[type="checkbox"]
-{
-    opacity: 0.5;
-    position:absolute;
+
+input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
     z-index: 0;
 }
+
+.checked {
+    border: 3px solid #0c0c0c;
+}
+
 /*something about making row by column and relative to parent element*/
 .slider_fill_in {
     position: absolute;
@@ -147,10 +155,11 @@ input[type="checkbox"]
 .slider_max {
     left: 100%;
 }
-.weight_limit_text
-{
-    user-select:none;
+
+.weight_limit_text {
+    user-select: none;
 }
+
 input[type="text"] {
     height: 3rem;
     width: 16rem;
@@ -184,16 +193,17 @@ input[type="text"] {
     flex-direction: column;
 
 }
-.type_photos
-{
-    height:1.5rem;
-    width:1.5rem;
+
+.type_photos {
+    height: 1.5rem;
+    width: 1.5rem;
 }
-.type_list
-{
-    display:flex;
-    flex-wrap:wrap;
+
+.type_list {
+    display: flex;
+    flex-wrap: wrap;
 }
+
 .container {
     align-items: center;
     width: 90vw;

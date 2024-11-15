@@ -1,6 +1,6 @@
 import '../css/style.css'
 import {pokemon} from "../JS/items.js"
-let drag =  false;
+
 const DOMSelectors = 
 {
         button: document.querySelector(".switch input"),
@@ -15,7 +15,8 @@ const DOMSelectors =
         slider_fill_in:document.querySelector(".slider_fill_in"),
         circle:document.querySelector(".circle"),
         submit:document.querySelector(".submit"),
-        type_label:document.querySelectorAll(".type_list")
+        type_label:document.querySelectorAll(".type_list"),
+        input_list:document.querySelectorAll(`.type_list input[type="checkbox"]`)
 
 }
 //Make sure it picks the right circle(closest) cursor position must be directly on top of the circle 
@@ -26,7 +27,24 @@ const DOMSelectors =
 //Make sure its within range of set range, if not set it to either min or max Accomplish with mousemove/other function
 //Set the current position of it based off the style.left propety 
 //take original circle position and subtract it from the determined position of the cursor. then add that difference to the style.left propety
+pokemon.forEach(stats=>
+  {
+      DOMSelectors.container.insertAdjacentHTML(
+          "afterbegin",
+          `<div class="card" id="${stats["name"]}">
+            <h2 class="card_header">${stats["name"]}</h2>
+            <img src="${stats["photos"]}" alt="${stats["name"]}" class="card_img">
+            <h2 class="card_header">Type : ${stats["type"]}</h2>
+            <h2 class="card_header">Evolution : ${stats["evolution"]}</h2> 
+            <h2 class="card_header">Weight : ${stats["weight"]} kg</h2> 
+          </div>`
+      );
+  }
+)
 
+
+
+let drag =  false;
 let initXvalue = 0;
 let originalLEFT=0;
 let onMouseMove=null;
@@ -82,27 +100,15 @@ function endDrag()
 }
 document.querySelectorAll('.circle').forEach(circle =>{circle.addEventListener("mousedown",event => intializeEvent(event))});
 document.querySelectorAll('.circle').forEach(circle =>{circle.addEventListener("mouseup", endDrag)});
-//Type Check
-//When the checkbox is checked underlay an element under the circle picture to create the illusion of it being selected
-//Keep track of the input values to utilize for searching. 
-function fetch_weight_limits()
-{
-  DOMSelectors.wegiht
-}
+
+
 function get_type_list_values(){
     let type_true = []  
-    let value = null;
-    const input_list =  document.querySelectorAll(`.type_list input[type="checkbox"]`);
-    input_list.forEach(input=>{
+    DOMSelectors.input_list.forEach(input=>{
       if(input.checked)
         {
-          value = true;
+          type_true.push(input.className)
         }
-        else
-        {
-          value = false;
-        }
-        type_true.push(value);
     });
     return type_true;
 }
@@ -110,38 +116,32 @@ DOMSelectors.submit.addEventListener("click", function(event)
 {
     event.preventDefault();
     const typeSelected = get_type_list_values();
-    console.log(typeSelected);
-    const min =  document.querySelector(".min").value;
-    const max =  document.querySelector(".max").value;
-    console.log(min,max);
-    
-
+    const min =  parseFloat(document.querySelector(".min").value);
+    const max =  parseFloat(document.querySelector(".max").value);
+    const range =  [min,max]
+    console.log(range, typeSelected)
+    filter(range, typeSelected);
 })
 
-//Evolution Check
-//Might be a dropdown menu or checkboxes
-//Utilize the same idea as before where place priority on certain evolutions etc
-
-
-//First searches for weight that matches range, then goes for the Type Check and then evolution check. 
-//If none of the pokemon match all the conditons search for the one that is closest to the conditions set. 
-
-
-console.log(DOMSelectors.menu)
-pokemon.forEach(stats=>
+DOMSelectors.input_list.forEach(input=>{
+  console.log(input);
+  input.addEventListener("change", function(event)
+  {
+    const img = input.nextElementSibling;
+    if(input.checked)
+      {
+        img.classList.add("checked");
+      }
+    else
     {
-        DOMSelectors.container.insertAdjacentHTML(
-            "afterbegin",
-            `<div class="card" id="${stats["name"]}">
-              <h2 class="card_header">${stats["name"]}</h2>
-              <img src="${stats["photos"]}" alt="${stats["name"]}" class="card_img">
-              <h2 class="card_header">Type : ${stats["type"]}</h2>
-              <h2 class="card_header">Evolution : ${stats["evolution"]}</h2> 
-              <h2 class="card_header">Weight : ${stats["weight"]} kg</h2> 
-            </div>`
-        );
+      img.classList.remove("checked");
     }
+  })
+}
 )
+
+function verify_type_truth()
+{}
 function filter(weight_range, type){
   let pokemon_truth = [];
     let valueTruth=2;
@@ -165,7 +165,7 @@ function filter(weight_range, type){
   }
   )
 }
-filter([10,20],"Psychic")
+// filter([10,20],"Psychic")
 
 DOMSelectors.container.addEventListener("click", function (event) {
   const element_selected = event.target.closest(".card");
@@ -243,8 +243,6 @@ DOMSelectors.button.addEventListener("change", function(event)
         body.classList.add("dark")
         slider.classList.remove("activeon")
         slider.classList.add("activeoff")
-
-    }
-
+      }
     }
 )
