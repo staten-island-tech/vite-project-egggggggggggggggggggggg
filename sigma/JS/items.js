@@ -13,7 +13,7 @@ const pokemon = [
         "region": "Hoenn",
         "evolution": ["Ralts", "Kirlia"],
         "photos": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/003.png",  // empty array for photos
-        "weight": 48.4  // weight in kg
+        "weight": 11  // weight in kg
     },
     {
         "name": "Charizard",
