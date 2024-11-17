@@ -88,15 +88,6 @@ body {
     vertical-align: middle;
 }
 
-.weight_limit_sliders {
-    position: relative;
-    width: 30%;
-    height: 30%;
-    background: white;
-    margin: 1rem auto;
-    padding: 1rem;
-}
-
 .slider_bar {
     border-radius: 1rem;
     position: absolute;
@@ -119,22 +110,30 @@ input[type="checkbox"] {
     border-radius: 50%;
 }
 
+
 .weight_limit_text {
     user-select: none;
+    align-items: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    margin:auto;
 }
 
-input[type="text"] {
+.min, .max {
     height: 3rem;
     width: 16rem;
     text-align: center;
+    align-items: center;
     border-color: lightgrey;
     font-size: 2rem;
     font-family: "Lato", sans-serif;
     border-width: 1px;
     color: #0c0c0c;
     border-style: solid;
+    box-sizing: border-box;
     margin: 1rem;
-
 }
 
 .lato-light {
