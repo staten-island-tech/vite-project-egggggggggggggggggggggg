@@ -1,4 +1,4 @@
-import '../css/style.css'
+import '../sigma/CSS/style.css'
 import {pokemon} from "../JS/items.js"
 
 const DOMSelectors = 
