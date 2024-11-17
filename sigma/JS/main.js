@@ -6,27 +6,12 @@ const DOMSelectors =
         button: document.querySelector(".switch input"),
         container: document.querySelector(".container"),
         form: document.querySelector("form"),
-        menu_pic: document.querySelector(".menu_pic"),
-        menu: document.querySelector(".menu_bar"),
-        weight_options: document.querySelector(".weight_options"),
-        slider_min:document.querySelector(".slider_min"),
-        slider_max:document.querySelector(".slider_max"),
-        slider_bar:document.querySelector(".slider_bar"),
-        slider_fill_in:document.querySelector(".slider_fill_in"),
-        circle:document.querySelector(".circle"),
+        min:document.querySelector(".min"),
+        max:document.querySelector(".max"),
         submit:document.querySelector(".submit"),
-        type_label:document.querySelectorAll(".type_list"),
         input_list:document.querySelectorAll(`.type_list input[type="checkbox"]`)
-
 }
-//Make sure it picks the right circle(closest) cursor position must be directly on top of the circle 
-//Make it so the max and min(vice versa) do not ever meet and cause problems (add a range of possible value)
-//
-//Make so it only change X positon (hori)
-//Get cursor current X position
-//Make sure its within range of set range, if not set it to either min or max Accomplish with mousemove/other function
-//Set the current position of it based off the style.left propety 
-//take original circle position and subtract it from the determined position of the cursor. then add that difference to the style.left propety
+
 pokemon.forEach(stats=>
   {
       DOMSelectors.container.insertAdjacentHTML(
@@ -42,66 +27,6 @@ pokemon.forEach(stats=>
   }
 )
 
-
-
-let drag =  false;
-let initXvalue = 0;
-let originalLEFT=0;
-let onMouseMove=null;
-let eventCounter = 0;
-//Trigger this when mousedown occurs aka when clicked
-function intializeEvent(item){
-    drag=true;
-    eventCounter+=1;
-    console.log(eventCounter);
-    initXvalue = item.clientX;
-    originalLEFT =  parseFloat(item.target.style.left||0)
-    console.log(originalLEFT);
-    changePosition(item);
-    console.log(item)
-}
-
-//Move to here when initializeEvent has occured
-function changePosition(item){
-    onMouseMove = function(event)
-    {
-        const item_target = item.target;
-        if(drag){
-            const difference =  event.clientX-initXvalue;
-            const currentLeft = parseFloat(item_target.style.left);
-            console.log(currentLeft,"CURRENTLEFt",item_target.style.left)
-            console.log(DOMSelectors.slider_min.style.left, "MIN", DOMSelectors.slider_max.style.left,"MAX")
-            if((currentLeft<0 || currentLeft>90)||(parseFloat(DOMSelectors.slider_min.style.left) > parseFloat(DOMSelectors.slider_max.style.left)))
-            {
-                console.log("range not exceeded/both positions do not equal each other")
-                if(item_target.className=="slider_min circle")
-                {
-                    console.log("sliderMin modified");
-                    item_target.style.left="0%";
-                }
-                else if(item_target.className=="slider_max circle")
-                {
-                    console.log("sliderMax modified");
-                    item_target.style.left="100%";
-                }
-                endDrag();
-            }//Checks to prevent position of circle from going too far left or too far right and also makes sure they dont end up in same position
-            else
-            {
-                item_target.style.left = `${originalLEFT+difference}px`;
-            }}
-    }
-    document.addEventListener("mousemove", onMouseMove);
-}
-function endDrag()
-{
-    drag=false;
-    document.removeEventListener("mousemove",onMouseMove);
-}
-document.querySelectorAll('.circle').forEach(circle =>{circle.addEventListener("mousedown",event => intializeEvent(event))});
-document.querySelectorAll('.circle').forEach(circle =>{circle.addEventListener("mouseup", endDrag)});
-
-
 function get_type_list_values(){
     let type_true = []  
     DOMSelectors.input_list.forEach(input=>{
@@ -116,15 +41,23 @@ DOMSelectors.submit.addEventListener("click", function(event)
 {
     event.preventDefault();
     const typeSelected = get_type_list_values();
-    const min =  parseFloat(document.querySelector(".min").value);
-    const max =  parseFloat(document.querySelector(".max").value);
+    const min =  parseFloat(DOMSelectors.min.value);
+    const max =  parseFloat(DOMSelectors.max.value);
+    if(min >=max)
+    {
+      alert("min must be less than max");
+      return;
+    }
+    if(isNaN(min) || isNaN(max))
+    {
+      alert("enter valid input");
+      return;
+    }
     const range =  [min,max]
-    console.log(range, typeSelected)
     filter(range, typeSelected);
 })
 
 DOMSelectors.input_list.forEach(input=>{
-  console.log(input);
   input.addEventListener("change", function(event)
   {
     const img = input.nextElementSibling;
@@ -139,34 +72,26 @@ DOMSelectors.input_list.forEach(input=>{
   })
 }
 )
-
-function verify_type_truth()
-{}
-function filter(weight_range, type){
-  let pokemon_truth = [];
-    let valueTruth=2;
-    pokemon.forEach(poke =>
+function filter(weight_range, types){
+  const scores = pokemon.map(poke =>
     {
+       let valueTruth=0;
        if(poke["weight"]<weight_range[1]&&poke["weight"]>weight_range[0])
        { 
-        valueTruth-=1;
+        valueTruth+=5
        }
-       if(poke["type"].includes(type))
-       {
-        valueTruth-=1
-       }
-      pokemon_truth.push([poke["name"],valueTruth]);
-      valueTruth=2;
-    })    
-  pokemon_truth.forEach(value_pair=>
+       const type_match = types.filter(type=>poke.type.includes(type)).length;
+        valueTruth+= type_match*5;
+       return{name:poke.name,score:valueTruth};
+    });
+  scores.sort((a,b)=>b.score-a.score)
+  scores.forEach((poke, index)=>
   {
-    const itemCHAnged = document.querySelector(`#${value_pair[0]}`);
-    itemCHAnged.classList.add(`order-${value_pair[1]}`);
+    const card = document.querySelector(`#${poke.name}`);
+    card.style.order = index;
   }
   )
 }
-// filter([10,20],"Psychic")
-
 DOMSelectors.container.addEventListener("click", function (event) {
   const element_selected = event.target.closest(".card");
   if (!element_selected) return; 
@@ -211,21 +136,12 @@ DOMSelectors.container.addEventListener("click", function (event) {
     element_selected.addEventListener("mouseleave", clearTimers);
     element_selected.addEventListener("mouseup", clearTimers);
   };
-
+ 
   element_selected.addEventListener("mousedown", handleMouseDown, {
     once: true,
   });
 });
-DOMSelectors.form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const name = document.querySelector(".Name").value;
-    const image = document.querySelector(".IMAGE_URL").value;
-    if(!name||!image){
-        console.log("INPUT SOMETHING")
-    }
-    
-    
-})
+
 DOMSelectors.button.addEventListener("change", function(event)
 {
     const body =  document.querySelector("body")

@@ -7,27 +7,34 @@ body,
     box-sizing: border-box;
 }
 
-.order-0 {
-    order: 0;
-}
-
-.order-1 {
-    order: 1;
-}
-
-.order-2 {
-    order: 2;
-}
-
 :root {
+    /* Colors */
     --dark: #262739;
     --light: #e7f8ea;
-    --active: 10px;
-    --nonactive: 0px;
-    --max: 100%;
-    --min: 0%;
-}
+    --primary-bg: #11c3bf;
+    --light-gray: #edeeef;
+    --grey: grey;
+    --black: #000;
+    --white: white;
+    --lightblue: lightblue;
+    --geenyellow: greenyellow;
 
+    /* Fonts */
+    --font-main: "Lato", sans-serif;
+    --font-secondary: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+    /* Spacing */
+    --padding-small: 1rem;
+    --padding-medium: 2rem;
+    --padding-large: 3rem;
+
+    /* Size */
+    --font-size-base: 10px;
+    --font-size-h2: 1.8rem;
+    --font-size-input: 2rem;
+    --slider-width: 3rem;
+    --card-width: 30%;
+}
 body {
     background-color: var(--dark);
 }
@@ -42,18 +49,13 @@ body {
 
 .background_switch {
     width: 3rem;
-    display: center;
-    justify-content: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
     padding: 10px;
     float: left;
     height: 100%;
-}
-
-h2 {
-    color: lightblue;
-    text-align: center;
-    width: 5rem;
 }
 
 .slider {
@@ -113,47 +115,8 @@ input[type="checkbox"] {
 }
 
 .checked {
-    border: 3px solid #0c0c0c;
-}
-
-/*something about making row by column and relative to parent element*/
-.slider_fill_in {
-    position: absolute;
-    top: 50%;
-    left: 0%;
-    width: 1rem;
-    height: 0.25rem;
-    background: rgba(160, 18, 18, 0.7);
-    transform: translateY(-50%);
-
-}
-
-.circle {
-    border-radius: 1rem;
-    cursor: pointer;
-    background-color: lightblue;
-    position: absolute;
-    height: 1rem;
-    width: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-
-}
-
-.slider_min,
-.slider_max {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.slider_min {
-    left: 0%;
-
-}
-
-.slider_max {
-    left: 100%;
+    outline: 4px solid greenyellow;
+    border-radius: 50%;
 }
 
 .weight_limit_text {
@@ -195,28 +158,38 @@ input[type="text"] {
 }
 
 .type_photos {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 3rem;
+    width: 3rem;
 }
 
 .type_list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows:repeat(3, auto);
+    gap:1rem;
 }
 
 .container {
     align-items: center;
-    width: 90vw;
+    width: calc(100vw - 2rem);
     margin: 2rem auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
+.card h2
+{
+    font-size:1.5rem;
+    text-align: center;
+}
 .card {
     width: 30%;
-    border-radius: 5px;
-    box-shadow: 10px 10px 10px black;
+    min-width:30%;
+    height:50rem;
+    max-width:30%;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem black;
     margin: 1rem 1rem;
     justify-content: center;
     align-items: center;
@@ -239,6 +212,7 @@ input[type="text"] {
     transform-origin: center;
 }
 
+
 @keyframes shaking {
     0% {
         transform: rotate(4deg);
@@ -257,15 +231,19 @@ input[type="text"] {
     }
 }
 
-@media(max-width:1200px) {
+@media(max-width:1200px) and (min-width:802px){
     .card {
         width: 30%;
     }
 }
 
-@media(max-width:800px) {
+@media(max-width:800px) and (min-width:601px){
     .card {
-        width: 40%;
+        width: 46%;
+    }
+
+    h2 {
+        font-size:clamp(1.8rem, 5vw, 2rem);
     }
 }
 
